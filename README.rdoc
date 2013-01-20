@@ -1,0 +1,6 @@
+= adt
+
+Describe your project here
+
+:include:adt.rdoc
+
