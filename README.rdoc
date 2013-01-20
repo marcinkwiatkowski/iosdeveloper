@@ -1,6 +1,6 @@
-= adt
+= iosdeveloper
 
 Describe your project here
 
-:include:adt.rdoc
+:include:iosdeveloper.rdoc
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    adt (0.0.1)
+    iosdeveloper (0.1.0)
       gli (= 2.5.3)
 
 GEM
@@ -54,8 +54,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  adt!
   aruba
+  iosdeveloper!
   mechanize (~> 2.5.1)
   rake
   rdoc

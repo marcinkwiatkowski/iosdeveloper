@@ -1,4 +1,4 @@
-= adt
+= iosdeveloper
 
 Generate this with
     adt rdoc

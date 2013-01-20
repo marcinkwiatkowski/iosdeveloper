@@ -1,8 +1,8 @@
 require "mechanize"
 
-module Adt
+module IOSDeveloper
 
-  class AppleDeveloperPortal
+  class ProvisioningPortal
 
     DEVICES_URL = "https://developer.apple.com/ios/manage/devices/index.action"
     PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/index.action"
@@ -36,7 +36,7 @@ module Adt
       else
         team_option = team_list.option_with(:text => @team_name)
       end
-      puts "Selecting team '#{team_option.text}' (ID: #{team_option.value})."
+      puts "Selecting team '#{team_option.text}'."
       team_option.select
       form.click_button(form.button_with(:name => 'action:saveTeamSelection!save'))
     end
