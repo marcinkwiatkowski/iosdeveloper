@@ -1,5 +1,5 @@
 # iosdeveloper
-iosdeveloper is a gem and let you access Apple Provisioning Portal from the command line.
+iosdeveloper is a ruby gem that provides a set of commands for managing devices and provisioning profiles directly from the command line. It's perfectly suited for continuous integration servers.
 
 ## Getting started
 
@@ -8,7 +8,6 @@ iosdeveloper is a gem and let you access Apple Provisioning Portal from the comm
 
 ### Create a config file
 ```iosdeveloper -u APPLE_ID -p PASSWORD init```  
-
 
 ## Examples
   
@@ -23,5 +22,5 @@ If you belong to multiple developer teams you should also provide ```-t TEAM_NAM
 ### List provisioning profiles
 ```iosdeveloper list-profiles```
 
-### Download a provistioning profile
+### Download a provisioning profile
 ```iosdeveloper download-profile PROFILE_NAME```
