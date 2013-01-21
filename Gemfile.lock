@@ -57,6 +57,5 @@ PLATFORMS
 DEPENDENCIES
   aruba
   iosdeveloper!
-  mechanize (~> 2.5.1)
   rake
   rdoc
