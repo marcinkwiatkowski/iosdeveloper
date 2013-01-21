@@ -10,7 +10,7 @@ rescue LoadError
   exit 64
 end
 
-CONFIG_FILE = Dir.pwd + "/iosdeveloper.rc.yml"
+DEFAULT_CONFIG_FILE_LOCATION = Dir.pwd + "/iosdeveloper.rc.yml"
 
 include GLI::App
 
@@ -18,23 +18,27 @@ program_desc 'iOS Developer Tools'
 
 version IOSDeveloper::VERSION
 
-desc 'Apple ID'
-arg_name 'username'
-flag [:username]
-
-desc 'Password'
-arg_name 'password'
-flag [:p, :password]
-
-desc 'Team name'
-arg_name 'team_name'
-flag [:t, :team]
+desc 'Location of the configuration file'
+arg_name 'config_file'
+default_value DEFAULT_CONFIG_FILE_LOCATION
+flag [:c, 'config-file']
 
 desc 'Creates the configuration file containing username, password and optionally team name'
 command :init do |c|
+  c.desc 'Apple ID'
+  c.arg_name 'username'
+  c.flag [:u, :username]
+
+  c.desc 'Password'
+  c.arg_name 'password'
+  c.flag [:p, :password]
+
+  c.desc 'Team name'
+  c.arg_name 'team_name'
+  c.flag [:t, :team]
   c.action do |global_options, options, args|
-    File.open(CONFIG_FILE, 'w', 0600) do |file|
-      YAML.dump(global_options.select { |k, v| [:username, :password, :team].include?(k) }, file)
+    File.open(global_options[:c]||DEFAULT_CONFIG_FILE_LOCATION, 'w', 0600) do |file|
+      YAML.dump({"username" => options[:username], "password" => options[:password], "team" => options[:team]}, file)
     end
   end
 end
@@ -81,10 +85,10 @@ command 'list-profiles' do |c|
 end
 
 def portal global_options
-  config_file = YAML::load(File.read(CONFIG_FILE))
-  username = global_options[:username] || config_file[:username] || raise("username not provided")
-  password = global_options[:password] || config_file[:password] || raise("password not provided")
-  team_name = global_options[:team] || config_file[:team]
+  config_file = YAML::load(File.read(global_options[:c]||DEFAULT_CONFIG_FILE_LOCATION))
+  username = config_file[:username] || raise("username not provided")
+  password = config_file[:password] || raise("password not provided")
+  team_name = config_file[:team]
 
   IOSDeveloper::ProvisioningPortal.new(username, password, team_name)
 end
