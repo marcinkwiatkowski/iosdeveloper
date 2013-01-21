@@ -4,7 +4,7 @@ require 'io/console'
 begin # XXX: Remove this begin/rescue before distributing your app
   require 'iosdeveloper'
 rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/adt` to run your app"
+  STDERR.puts "In development, you need to use `bundle exec bin/iosdeveloper` to run your app"
   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
   STDERR.puts "Feel free to remove this message from bin/adt now"
   exit 64
@@ -30,7 +30,7 @@ desc 'Team name'
 arg_name 'team_name'
 flag [:t, :team]
 
-desc 'Creates the configuration file containing current global options'
+desc 'Creates the configuration file containing username, password and optionally team name'
 command :init do |c|
   c.action do |global_options, options, args|
     File.open(CONFIG_FILE, 'w', 0600) do |file|
