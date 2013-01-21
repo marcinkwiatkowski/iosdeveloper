@@ -1,5 +1,5 @@
 = iosdeveloper
 
 Generate this with
-    adt rdoc
+    iosdeveloper rdoc
 After you have described your command line interface

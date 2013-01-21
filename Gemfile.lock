@@ -3,6 +3,7 @@ PATH
   specs:
     iosdeveloper (0.1.0)
       gli (= 2.5.3)
+      mechanize (= 2.5.1)
 
 GEM
   remote: http://rubygems.org/
