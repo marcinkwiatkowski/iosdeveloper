@@ -6,6 +6,7 @@ module IOSDeveloper
 
     DEVICES_URL = "https://developer.apple.com/ios/manage/devices/index.action"
     PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/index.action"
+    DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/viewDistributionProfiles.action"
     ADD_DEVICE_URL = "https://developer.apple.com/ios/manage/devices/add.action"
 
     def initialize (login, password, team_name)
@@ -71,13 +72,24 @@ module IOSDeveloper
     end
 
     def list_profiles
-      page = get_page(PROFILES_URL)
+      get_development_profiles + get_distribution_profiles
+    end
 
+    def get_development_profiles
+      get_profiles(PROFILES_URL, 'development')
+    end
+
+    def get_distribution_profiles
+      get_profiles(DISTRIBUTION_PROFILES_URL, 'distribution')
+    end
+
+    def get_profiles(url, type)
+      page = get_page(url)
       page.search("#remove table tbody tr").map do |item|
         name = item.at(".profile span").text
         app_id = item.at(".appid").text
         status = item.at(".statusXcode").child.text.strip
-        "#{name} - #{app_id} - #{status}"
+        Profile.new(name, app_id, status, type)
       end
     end
 

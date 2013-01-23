@@ -14,6 +14,7 @@ spec = Gem::Specification.new do |s|
 bin/iosdeveloper
 lib/iosdeveloper/version.rb
 lib/iosdeveloper/provisioning_portal.rb
+lib/iosdeveloper/profile.rb
 lib/iosdeveloper.rb
   )
   s.require_paths << 'lib'
