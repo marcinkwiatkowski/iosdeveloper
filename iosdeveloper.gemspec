@@ -8,7 +8,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = 'https://github.com/marcinkwiatkowski/iosdeveloper'
   s.platform = Gem::Platform::RUBY
   s.summary = %q{iOS Developer Tools}
-  s.description = %q{Command line tools for accessing iOS Provisioning Profile}
+  s.description = %q{Command line tools for accessing iOS Provisioning Portal}
 # Add your other files here if you make them
   s.files = %w(
 bin/iosdeveloper
@@ -18,9 +18,6 @@ lib/iosdeveloper/profile.rb
 lib/iosdeveloper.rb
   )
   s.require_paths << 'lib'
-  s.has_rdoc = true
-  s.extra_rdoc_files = ['README.rdoc', 'iosdeveloper.rdoc']
-  s.rdoc_options << '--title' << 'iosdeveloper' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'iosdeveloper'
   s.add_development_dependency('rake')
