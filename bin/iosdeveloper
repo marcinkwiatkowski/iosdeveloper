@@ -66,11 +66,12 @@ command 'add-device' do |c|
 end
 
 desc 'Downloads provisioning profile'
+arg_name 'PROFILE_ID'
 command 'download-profile' do |c|
   c.action do |global_options, options, args|
-    profile_name = args.shift
-    file_name = "#{profile_name}.mobileprovision"
-    portal(global_options).download_profile(profile_name, file_name)
+    profile_id = args.shift
+    file_name = "#{profile_id}.mobileprovision"
+    portal(global_options).download_profile(profile_id, file_name)
   end
 end
 
@@ -80,7 +81,7 @@ command 'list-profiles' do |c|
     profiles = portal(global_options).list_profiles
     puts ""
     profiles.each do |profile|
-      puts "#{profile.name} #{profile.app_id} #{profile.status}"
+      puts "#{profile.id}|#{profile.name}|#{profile.app_id}|#{profile.status}"
     end
   end
 end

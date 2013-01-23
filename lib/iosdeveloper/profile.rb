@@ -2,14 +2,15 @@ module IOSDeveloper
 
   class Profile
 
-    def initialize(name, app_id, status, type)
+    def initialize(id, name, app_id, status, type)
+      @id = id
       @name = name
       @app_id = app_id
       @status = status
       @type = type
     end
 
-    attr_reader :name, :app_id, :status, :type
+    attr_reader :id, :name, :app_id, :status, :type
 
   end
 

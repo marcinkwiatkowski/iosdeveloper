@@ -89,8 +89,13 @@ module IOSDeveloper
         name = item.at(".profile span").text
         app_id = item.at(".appid").text
         status = item.at(".statusXcode").child.text.strip
-        Profile.new(name, app_id, status, type)
+        profile_id = profile_id(item.at(".profile a").attr("href"))
+        Profile.new(profile_id, name, app_id, status, type)
       end
+    end
+
+    def profile_id(display_url)
+      /provDisplayId=(\w+)/.match(display_url)[1]
     end
 
     def download_profile(profile_name, file_name)
