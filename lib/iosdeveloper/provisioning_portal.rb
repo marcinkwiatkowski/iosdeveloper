@@ -76,7 +76,7 @@ module IOSDeveloper
       page.search("#remove table tbody tr").map do |item|
         name = item.at(".profile span").text
         app_id = item.at(".appid").text
-        status = item.at(".statusXcode").text.strip
+        status = item.at(".statusXcode").child.text.strip
         "#{name} - #{app_id} - #{status}"
       end
     end

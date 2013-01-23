@@ -86,9 +86,9 @@ end
 
 def portal global_options
   config_file = YAML::load(File.read(global_options[:c]||DEFAULT_CONFIG_FILE_LOCATION))
-  username = config_file[:username] || raise("username not provided")
-  password = config_file[:password] || raise("password not provided")
-  team_name = config_file[:team]
+  username = config_file['username'] || raise("username not provided")
+  password = config_file['password'] || raise("password not provided")
+  team_name = config_file['team']
 
   IOSDeveloper::ProvisioningPortal.new(username, password, team_name)
 end
