@@ -79,7 +79,6 @@ command 'list-profiles' do |c|
   c.action do |global_options, options, args|
     profiles = portal(global_options).list_profiles
     puts ""
-    puts "Development Provisioning Profiles:"
     profiles.each do |profile|
       puts "#{profile.name} #{profile.app_id} #{profile.status}"
     end
