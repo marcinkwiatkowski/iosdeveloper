@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    iosdeveloper (0.1.0)
+    iosdeveloper (0.1.1)
       gli (= 2.5.3)
       mechanize (= 2.5.1)
 
