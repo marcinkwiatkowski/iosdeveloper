@@ -98,14 +98,14 @@ module IOSDeveloper
       /provDisplayId=(\w+)/.match(display_url)[1]
     end
 
-    def download_profile(profile_name, file_name)
+    def download_profile(profile_id, file_name)
       page = get_page(PROFILES_URL)
       page.search("#remove table tbody tr").each do |item|
-        name = item.at(".profile span").text
-        if name == profile_name
+        id = profile_id(item.at(".profile a").attr("href"))
+        if id == profile_id
           download_link = item.at(".action a").attr("href")
           @agent.get(download_link).save(file_name)
-          puts "Saved #{profile_name} profile in #{file_name}"
+          puts "Saved #{profile_id} profile in #{file_name}"
         end
       end
     end
