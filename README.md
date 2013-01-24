@@ -26,4 +26,4 @@ If you belong to multiple developer teams you should also provide ```-t TEAM_NAM
 ```iosdeveloper [-c CONFIG_FILE] list-profiles```
 
 ### Download a provisioning profile
-```iosdeveloper [-c CONFIG_FILE] download-profile PROFILE_ID```
+```iosdeveloper [-c CONFIG_FILE] download-profile PROFILE_NAME```
