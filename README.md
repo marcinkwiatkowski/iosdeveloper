@@ -9,7 +9,7 @@ It's perfectly suited for continuous integration servers.
 ```gem install iosdeveloper``` will install ```iosdeveloper``` command. You'll be using that command for accessing Provisioning Portal.
 
 ### Create a config file
-```iosdeveloper -u APPLE_ID -p PASSWORD init```  
+```iosdeveloper [-c CONFIG_FILE] init -u APPLE_ID -p PASSWORD```  
   
   
 If you belong to multiple developer teams you should also provide ```-t TEAM_NAME``` flag. 
@@ -17,13 +17,13 @@ If you belong to multiple developer teams you should also provide ```-t TEAM_NAM
 ## Examples  
 
 ### List registered devices
-```iodeveloper list-devices```
+```iodeveloper [-c CONFIG_FILE] list-devices```
 
 ### Add a new device
-```iosdeveloper add-device DEVICE_NAME DEVICE_ID```
+```iosdeveloper [-c CONFIG_FILE] add-device DEVICE_NAME DEVICE_ID```
 
 ### List provisioning profiles
-```iosdeveloper list-profiles```
+```iosdeveloper [-c CONFIG_FILE] list-profiles```
 
 ### Download a provisioning profile
-```iosdeveloper download-profile PROFILE_ID```
+```iosdeveloper [-c CONFIG_FILE] download-profile PROFILE_ID```
