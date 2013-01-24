@@ -89,20 +89,25 @@ module IOSDeveloper
         name = item.at(".profile span").text
         app_id = item.at(".appid").text
         status = item.at(".statusXcode").child.text.strip
-        Profile.new(name, app_id, status, type)
+        download_url = item.at(".action a").attr("href")
+        Profile.new(name, app_id, status, type, download_url)
       end
     end
 
+    def profile_id(display_url)
+      /provDisplayId=(\w+)/.match(display_url)[1]
+    end
+
     def download_profile(profile_name, file_name)
-      page = get_page(PROFILES_URL)
-      page.search("#remove table tbody tr").each do |item|
-        name = item.at(".profile span").text
-        if name == profile_name
-          download_link = item.at(".action a").attr("href")
-          @agent.get(download_link).save(file_name)
+      profiles = list_profiles
+      profiles.each do |profile|
+        if profile.name == profile_name
+          @agent.get(profile.download_url).save(file_name)
           puts "Saved #{profile_name} profile in #{file_name}"
+          return
         end
       end
+      puts "Could not find profile with name: #{profile_name}"
     end
 
   end
