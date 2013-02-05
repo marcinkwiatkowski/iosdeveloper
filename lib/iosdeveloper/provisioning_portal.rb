@@ -8,6 +8,7 @@ module IOSDeveloper
     PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/index.action"
     DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/viewDistributionProfiles.action"
     ADD_DEVICE_URL = "https://developer.apple.com/ios/manage/devices/add.action"
+    PROVISIONING_PROFILES_LOCATION = "#{ENV['HOME']}/Library/MobileDevice/Provisioning Profiles"
 
     def initialize (login, password, team_name)
       @agent = Mechanize.new
@@ -98,16 +99,21 @@ module IOSDeveloper
       /provDisplayId=(\w+)/.match(display_url)[1]
     end
 
-    def download_profile(profile_name, file_name)
+    def download_profile(profile_name, location=".")
       profiles = list_profiles
       profiles.each do |profile|
         if profile.name == profile_name
+          file_name = "#{location}/#{profile_name}.mobileprovision"
           @agent.get(profile.download_url).save(file_name)
           puts "Saved #{profile_name} profile in #{file_name}"
           return
         end
       end
       puts "Could not find profile with name: #{profile_name}"
+    end
+
+    def install_profile profile_name
+      download_profile(profile_name, PROVISIONING_PROFILES_LOCATION)
     end
 
   end
