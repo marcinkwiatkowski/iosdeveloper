@@ -4,6 +4,7 @@ PATH
     iosdeveloper (0.2.0)
       gli (= 2.5.3)
       mechanize (= 2.5.1)
+      plist (= 3.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -36,11 +37,12 @@ GEM
       nokogiri (~> 1.4)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
-    mime-types (1.19)
+    mime-types (1.21)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.8)
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
+    plist (3.1.0)
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)

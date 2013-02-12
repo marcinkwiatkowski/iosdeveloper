@@ -1,4 +1,6 @@
 require "mechanize"
+require "plist"
+require "fileutils"
 
 module IOSDeveloper
 
@@ -102,17 +104,29 @@ module IOSDeveloper
     def download_profile(profile_name, location=".")
       profiles = list_profiles
       profiles.each do |profile|
-        if profile.name == profile_name
-          file_name = "#{location}/#{profile_name}.mobileprovision"
-          @agent.get(profile.download_url).save(file_name)
-          puts "Saved #{profile_name} profile in #{file_name}"
-          return
+        if profile_name.nil? || (profile.name == profile_name)
+          temporal_file_location = "#{profile.name}.mobileprovision"
+          puts "Downloading #{profile.name} ..."
+          @agent.get(profile.download_url).save(temporal_file_location)
+          uuid = get_uuid(temporal_file_location)
+          file_location = "#{location}/#{uuid}.mobileprovision"
+          FileUtils.move(temporal_file_location, file_location)
+          puts "Saved #{profile.name} profile in #{file_location}"
         end
       end
-      puts "Could not find profile with name: #{profile_name}"
     end
 
-    def install_profile profile_name
+    def get_uuid profile_file
+      p7 = OpenSSL::PKCS7.new(File.read(profile_file))
+      store = OpenSSL::X509::Store.new
+      cert = OpenSSL::X509::Certificate.new(File.read("AppleIncRootCertificate.cer"))
+      store.add_cert(cert)
+      p7.verify([cert], store)
+      hash = Plist::parse_xml(p7.data)
+      hash["UUID"]
+    end
+
+    def install_profile profile_name=nil
       download_profile(profile_name, PROVISIONING_PROFILES_LOCATION)
     end
 

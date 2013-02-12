@@ -24,5 +24,6 @@ lib/iosdeveloper.rb
   s.add_development_dependency('rdoc')
   s.add_development_dependency('aruba')
   s.add_runtime_dependency('gli', '2.5.3')
+  s.add_runtime_dependency('plist', '3.1.0')
   s.add_runtime_dependency('mechanize', '2.5.1')
 end
