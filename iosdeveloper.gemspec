@@ -16,6 +16,7 @@ lib/iosdeveloper/version.rb
 lib/iosdeveloper/provisioning_portal.rb
 lib/iosdeveloper/profile.rb
 lib/iosdeveloper.rb
+AppleIncRootCertificate.cer
   )
   s.require_paths << 'lib'
   s.bindir = 'bin'
