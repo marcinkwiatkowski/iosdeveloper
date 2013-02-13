@@ -119,7 +119,7 @@ module IOSDeveloper
     def get_uuid profile_file
       p7 = OpenSSL::PKCS7.new(File.read(profile_file))
       store = OpenSSL::X509::Store.new
-      cert = OpenSSL::X509::Certificate.new(File.read("AppleIncRootCertificate.cer"))
+      cert = OpenSSL::X509::Certificate.new(File.read(File.join(File.dirname(File.expand_path(__FILE__)), '../AppleIncRootCertificate.cer')))
       store.add_cert(cert)
       p7.verify([cert], store)
       hash = Plist::parse_xml(p7.data)
