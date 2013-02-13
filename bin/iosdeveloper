@@ -68,14 +68,17 @@ end
 desc 'Installs provisioning profile'
 arg_name 'PROFILE_NAME'
 command 'install-profile' do |c|
+  c.desc "Installs all development and distribution profiles"
   c.switch [:a, 'all']
+  c.desc "Saves profile(s) using uuid as a name"
+  c.switch [:uuid]
   c.action do |global_options, options, args|
     portal = portal(global_options)
     if (options[:a])
-      portal.install_profile
+      portal.install_profile(nil, options)
     else
       profile_name = args.shift
-      portal.install_profile(profile_name)
+      portal.install_profile(profile_name, options)
     end
   end
 end

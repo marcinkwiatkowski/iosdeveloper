@@ -101,15 +101,18 @@ module IOSDeveloper
       /provDisplayId=(\w+)/.match(display_url)[1]
     end
 
-    def download_profile(profile_name, location=".")
+    def download_profile(profile_name, location=".", options)
       profiles = list_profiles
       profiles.each do |profile|
         if profile_name.nil? || (profile.name == profile_name)
           temporal_file_location = "#{profile.name}.mobileprovision"
           puts "Downloading #{profile.name} ..."
           @agent.get(profile.download_url).save(temporal_file_location)
-          uuid = get_uuid(temporal_file_location)
-          file_location = "#{location}/#{uuid}.mobileprovision"
+          if (options[:uuid])
+            file_location = "#{location}/#{get_uuid(temporal_file_location)}.mobileprovision"
+          else
+            file_location = "#{location}/#{profile.name}.mobileprovision"
+          end
           FileUtils.move(temporal_file_location, file_location)
           puts "Saved #{profile.name} profile in #{file_location}"
         end
@@ -126,8 +129,8 @@ module IOSDeveloper
       hash["UUID"]
     end
 
-    def install_profile profile_name=nil
-      download_profile(profile_name, PROVISIONING_PROFILES_LOCATION)
+    def install_profile profile_name=nil, options
+      download_profile(profile_name, PROVISIONING_PROFILES_LOCATION, options)
     end
 
   end
